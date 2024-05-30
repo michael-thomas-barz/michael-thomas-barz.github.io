@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sickness Probability Calculator</title>
+    <style>
+        body {
+            background-color: #282828;
+            color: #fbf1c7;
+            font-family: Monaco, monospace;
+            font-size: 14px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0;
+        }
+
+        h1, h2 {
+            color: #b16286;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px;
+            background-color: #458588;
+            color: #fbf1c7;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #689d6a;
+        }
+
+        #result {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sickness Probability Calculator</h1>
+    <p id="result">You have a 0.01% chance of being sick.</p>
+    <button onclick="testPositive()">Test Positive</button>
+    <button onclick="testNegative()">Test Negative</button>
+
+    <script>
+        let probabilityYouAreSick = 0.0001;
+
+        function testPositive() {
+            let probabilityYouTestPositive = probabilityYouAreSick * 0.99 + (1 - probabilityYouAreSick) * 0.05;
+            probabilityYouAreSick = probabilityYouAreSick * 0.99 / probabilityYouTestPositive;
+            updateResult();
+        }
+
+        function testNegative() {
+            let probabilityYouTestNegative = probabilityYouAreSick * 0.01 + (1 - probabilityYouAreSick) * 0.95;
+            probabilityYouAreSick = probabilityYouAreSick * 0.01 / probabilityYouTestNegative;
+            updateResult();
+        }
+
+        function updateResult() {
+            document.getElementById("result").textContent = "You have a " + (probabilityYouAreSick * 100).toFixed(4) + "% chance of being sick.";
+        }
+    </script>
+</body>
+</html>
