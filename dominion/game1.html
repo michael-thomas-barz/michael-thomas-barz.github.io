@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Michael Barz's Personal Website - Game Title</title>
+    <style>
+        body {
+            background-color: #282828;
+            color: #fbf1c7;
+            font-family: Monaco, monospace;
+            font-size: 14px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0;
+        }
+
+        h1, h2 {
+            color: #b16286;
+        }
+
+        h3 {
+            color: #689d6a;
+        }
+
+        a {
+            color: #458588; /* All URLs styled with the same blue color */
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #fbf1c7;
+        }
+
+        blockquote {
+            border-left: 4px solid #fbf1c7;
+            padding-left: 10px;
+            margin-left: 0;
+        }
+
+        @media screen and (max-width: 900px) {
+            body {
+                padding: 20px;
+            }
+
+            td {
+                padding-bottom: 1rem;
+            }
+        }
+
+        #photo {
+            background: url("../profile-picture.jpg") no-repeat;
+            background-size: contain;
+            width: 300px;
+            height: 300px;
+        }
+
+        #photo:hover {
+            background: url("../michael-dog-cropped.jpg") no-repeat;
+            background-size: contain;
+        }
+
+        .hover-image {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hover-image::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: -420px;
+            width: 600px;
+            height: 600px;
+            margin-left: -100px;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            background: url("../anton-grad.jpg") no-repeat;
+            background-size: contain;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none; /* So that the image does not interfere with mouse events */
+        }
+
+        .hover-image:hover::after {
+            opacity: 1;
+        }
+
+        .hover-photo {
+            width: 100%;
+            max-width: 900px;
+            margin-top: 20px;
+            background: url("../math-chalkboard.jpg") no-repeat;
+            background-size: contain;
+            height: 420px; /* Adjust height to match the aspect ratio of the image */
+        }
+
+        .hover-photo:hover {
+            background: url("../chalkboard-other.jpg") no-repeat;
+            background-size: contain;
+        }
+
+        .kingdom {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="photo"></div>
+    <h1>Game Title</h1>
+    <p><b style="color: #cc241d;">email: </b>michaelbarz AT princeton DOT edu</p>
+    <hr>
+    <h3>Date Played: January 1, 2024</h3>
+    <img src="kingdom.jpg" alt="Kingdom" class="kingdom">
+    <hr>
+    <h3>Heading 1</h3>
+    <h4>Concept:</h4>
+    <p>Explanation of the concept.</p>
+    <h4>Drawbacks:</h4>
+    <p>Explanation of the drawbacks.</p>
+    <hr>
+    <h3>Heading 2</h3>
+    <h4>Concept:</h4>
+    <p>Explanation of the concept.</p>
+    <h4>Drawbacks:</h4>
+    <p>Explanation of the drawbacks.</p>
+    <!-- Add more sections as needed -->
+    <hr>
+    <p>This website uses vim's <a href="https://github.com/morhetz/gruvbox">gruvbox</a> color scheme. <a href="https://antonoutkine.com" class="hover-image">Anton Outkine</a> taught me how to add a photo to a webpage (he also taught me more important things...).</p>
+    <div class="hover-photo"></div>
+</body>
+</html>
