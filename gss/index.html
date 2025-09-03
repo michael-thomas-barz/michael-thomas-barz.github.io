@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graduate Student Seminar</title>
+    <style>
+        body {
+            background-color: #282828;
+            color: #fbf1c7;
+            font-family: Monaco, monospace;
+            font-size: 14px;
+            padding: 20px;
+            max-width: 700px;
+            margin: 0;
+        }
+
+        h1, h2 {
+            color: #b16286;
+        }
+
+        h3 {
+            color: #689d6a;
+        }
+
+        a {
+            color: #458588;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #fbf1c7;
+        }
+
+        .abstract {
+            display: none;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 2px solid #fbf1c7;
+            color: #ebdbb2;
+        }
+
+        .date {
+            color: #d79921;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function toggleAbstract(id) {
+            var elem = document.getElementById(id);
+            if (elem.style.display === "block") {
+                elem.style.display = "none";
+            } else {
+                elem.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Graduate Student Seminar</h1>
+    <p><b style="color: #cc241d;">Held every Thursday!</b></p>
+    <p>Pizza in the common room at 12-12:30. Talk in Fine 314 at 12:30-1:15.</p>
+    <hr>
+
+    <h3>Upcoming Talks</h3>
+
+    <p class="date">September 4</p>
+    <a onclick="toggleAbstract('abs-sept4')">Igor Medvedev — "How much math did Einstein actually know?"</a>
+    <div id="abs-sept4" class="abstract">
+        In the 20th century Einstein formulated his famous Field 
+Equations relating gravity to geometry, using differential geometry 
+concepts such as curvature. At the time, these mathematical concepts 
+were very new. On the other hand, you might have heard the myth that 
+Einstein failed his high school math. You might have also heard that 
+Einstein was a genius. So, how much math did Einstein actually know? 
+In this talk, we will discuss the various mathematical ideas that go 
+into the Einstein equations through a historical lens. Finally, we 
+will see and try to explain some of the limitations of Einstein’s 
+mathematical knowledge.
+    </div>
+
+    <p class="date">September 11</p>
+    <a onclick="toggleAbstract('abs-sept11')">Kunal Chawla — TBA</a>
+    <div id="abs-sept11" class="abstract">
+        TBA
+    </div>
+
+    <p class="date">September 18</p>
+    <a onclick="toggleAbstract('abs-sept18')">Kenta Suzuki — TBA</a>
+    <div id="abs-sept18" class="abstract">
+        TBA
+    </div>
+</body>
+</html>
