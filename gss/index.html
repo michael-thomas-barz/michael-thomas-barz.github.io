@@ -21,12 +21,6 @@
             color: #689d6a;
         }
 
-        a {
-            color: #458588;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
         hr {
             border: 0;
             height: 1px;
@@ -42,9 +36,30 @@
             color: #ebdbb2;
         }
 
+        .talk {
+            margin-bottom: 1rem;
+        }
+
         .date {
             color: #d79921;
             font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .speaker {
+            color: #458588;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .speaker:hover {
+            color: #83a598;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #928374;
+            margin-left: 5px;
         }
     </style>
     <script>
@@ -66,31 +81,47 @@
 
     <h3>Upcoming Talks</h3>
 
-    <p class="date">September 4</p>
-    <a onclick="toggleAbstract('abs-sept4')">Igor Medvedev — "How much math did Einstein actually know?"</a>
-    <div id="abs-sept4" class="abstract">
-        In the 20th century Einstein formulated his famous Field 
-Equations relating gravity to geometry, using differential geometry 
-concepts such as curvature. At the time, these mathematical concepts 
-were very new. On the other hand, you might have heard the myth that 
-Einstein failed his high school math. You might have also heard that 
-Einstein was a genius. So, how much math did Einstein actually know? 
-In this talk, we will discuss the various mathematical ideas that go 
-into the Einstein equations through a historical lens. Finally, we 
-will see and try to explain some of the limitations of Einstein’s 
-mathematical knowledge.
+    <div class="talk">
+        <span class="date">September 4</span>
+        <span class="speaker" onclick="toggleAbstract('abs-sept4')">
+            Alice Johnson — "Introduction to Perfectoid Spaces"
+        </span>
+        <span class="hint">(click for abstract)</span>
+        <div id="abs-sept4" class="abstract">
+            Perfectoid spaces have transformed arithmetic geometry in the last decade. 
+            I’ll introduce the intuition behind perfectoid fields, describe why they 
+            are useful, and give some applications to understanding torsion in the cohomology 
+            of Shimura varieties.
+        </div>
     </div>
 
-    <p class="date">September 11</p>
-    <a onclick="toggleAbstract('abs-sept11')">Kunal Chawla — TBA</a>
-    <div id="abs-sept11" class="abstract">
-        TBA
+    <div class="talk">
+        <span class="date">September 11</span>
+        <span class="speaker" onclick="toggleAbstract('abs-sept11')">
+            Brian Lee — "Spectral Sequences without Tears"
+        </span>
+        <span class="hint">(click for abstract)</span>
+        <div id="abs-sept11" class="abstract">
+            Spectral sequences often appear intimidating, but they’re really just 
+            a systematic way of organizing complicated homological algebra. 
+            I’ll walk through concrete examples, explain convergence, and show 
+            how they appear naturally in geometry and topology.
+        </div>
     </div>
 
-    <p class="date">September 18</p>
-    <a onclick="toggleAbstract('abs-sept18')">Kenta Suzuki — TBA</a>
-    <div id="abs-sept18" class="abstract">
-        TBA
+    <div class="talk">
+        <span class="date">September 18</span>
+        <span class="speaker" onclick="toggleAbstract('abs-sept18')">
+            Clara Smith — "Stability in the Moduli of Curves"
+        </span>
+        <span class="hint">(click for abstract)</span>
+        <div id="abs-sept18" class="abstract">
+            The Deligne–Mumford compactification of the moduli space of curves 
+            is one of the central constructions in algebraic geometry. 
+            I’ll give a student-friendly introduction to stable curves, 
+            the idea of adding boundary components, and some modern developments 
+            in the subject.
+        </div>
     </div>
 </body>
 </html>
