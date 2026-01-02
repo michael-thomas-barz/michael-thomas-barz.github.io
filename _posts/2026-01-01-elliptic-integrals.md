@@ -5,16 +5,16 @@ date: 2026-01-01
 
 ## What is done? 
 
-test code 8
+test code 9
 
 It is a shame that I don't know more about elliptic functions, so I am going to try and learn a few more things about them. To start, today I am going to say a few things about the arclengths of *lemniscates*.
 
 ## The lemniscate
 
 Recall that the *lemniscate*, a figure-eight looking shape, has equation
-\[
+$$
 (x^2 + y^2)^2 = 2(x^2 - y^2).
-\]
+$$
 
 Geometrically, we can describe it as the locus of points \(P\) such that the *product* of the distance from \( P \) to \((-1, 0)\) with the distance from $P$ to \((1, 0)\) is equal to \(1.\) 
 
