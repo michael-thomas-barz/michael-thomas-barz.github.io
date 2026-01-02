@@ -16,10 +16,9 @@ Jacobi proved
 > **Theorem (Jacobi Normal Form).** Let $M$ be a (square) symmetric matrix with coefficients in a field $k.$
 > Then $M$ is congruent to a *tridiagonal matrix* -- that is, a matrix whose only nonzero entries are on the diagonal, or on entries immediately above or below the diagonal.
 
-Let's see how. 
+**Remark 1**. The tridiagonal matrix congruent to $M$ is necessarily also symmetric, since symmetry is stable under congruence.
 
-> **Remark**. The tridiagonal matrix congruent to $M$ is necessarily also symmetric, since symmetry is stable under congruence.
-> **Remark**. While I will not prove it here, using the standard tricks employed in the proof of Smith normal form, one can allow $k$ to be a PID instead of just a field.
+**Remark 2**. While I will not prove it here, using the standard tricks employed in the proof of Smith normal form, one can allow $k$ to be a PID instead of just a field.
 
 ## The proof of Jacobi's theorem
 
