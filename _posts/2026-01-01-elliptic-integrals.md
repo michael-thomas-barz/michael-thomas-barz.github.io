@@ -5,6 +5,8 @@ date: 2026-01-01
 
 ## What is done? 
 
+test code 8
+
 It is a shame that I don't know more about elliptic functions, so I am going to try and learn a few more things about them. To start, today I am going to say a few things about the arclengths of *lemniscates*.
 
 ## The lemniscate
