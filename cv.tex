@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}   % for left column that wraps + right column dates
+\usepackage{setspace}   % optional, for fine spacing control
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% ---- Section header like "RESEARCH INTERESTS"
+\newcommand{\cvsection}[1]{%
+  \vspace{1.1\baselineskip}%
+  {\scshape #1}\par
+  \vspace{0.35\baselineskip}%
+}
+
+% ---- Entry with bold left title + right-aligned dates, then indented lines
+\newcommand{\cventry}[3]{%
+  \begin{tabularx}{\textwidth}{@{}X r@{}}
+    \textbf{#1} & #2
+  \end{tabularx}\par
+  \hspace*{2em}#3\par
+  \vspace{0.5\baselineskip}%
+}
+
+% ---- Entry with multiple indented lines (pass a \par-separated block)
+\newcommand{\cventryblock}[3]{%
+  \begin{tabularx}{\textwidth}{@{}X r@{}}
+    \textbf{#1} & #2
+  \end{tabularx}\par
+  \begin{minipage}{\textwidth}
+    \setlength{\parskip}{0pt}
+    \setlength{\parindent}{2em}
+    #3
+  \end{minipage}\par
+  \vspace{0.5\baselineskip}%
+}
+\newcommand{\cvpub}[4]{%
+  \item \textbf{#1}. \\
+  #2. \\
+  {\itshape #3}%
+  \if\relax\detokenize{#4}\relax\else\ \,(\url{#4})\fi
+}
+\begin{document}
+
+{\Large\textbf{Michael Barz}}\par
+\vspace{0.3\baselineskip}
+\hrule
+\vspace{0.6\baselineskip}
+
+\hspace*{2em}\textit{Email:} \href{mailto:michaelbarz@princeton.edu}{michaelbarz@princeton.edu}\par
+\hspace*{2em}\textit{Web:} \url{http://michael.dog/}\par
+
+\cvsection{EDUCATION}
+
+\cventry{Princeton University}{2024 --}
+{Ph.D. in Mathematics (Advisor: Bhargav Bhatt; currently in my \emph{second} year)}
+
+\cventry{University of Chicago}{2020 -- 2024}
+{B.A. in mathematics with honors, and Paul R. Cohen Prize (awarded to the top 5 undergraduate math majors)}
+
+\cvsection{RESEARCH BACKGROUND}
+
+I am interested in \emph{arithmetic geometry}, especially questions related to the Grothendieck-Katz \(p\)-curvature conjecture. The Grothendieck-Katz \(p\)-curvature conjecture asks something straightforward: given an ordinary differential equation, is there any relationship between the \emph{complex} solutions -- holomorphic functions on open subsets of the complex plane which solve this ODE -- and the solutions \emph{modulo \(p\)}, for \(p\) a prime number? It is a little tricky to make complete sense of what it means to solve a differential equation in modular arithmetic, but to first approximation one might take this as asking about \emph{formal power series} solutions to the ODE in which the formal power series has integer coefficients, and in which the differential equation holds \emph{modulo \(p\)}. Grothendieck, and subsequently Katz, conjectured a precise relationship for a certain class of differential equations; I am interested in exploring this conjecture, and generalizing it to other classes of differential equations.
+
+Why focus so much on differential equations? Certain shapes, like the circle \(x^2 + y^2 = 1,\) are defined by polynomial equations which make sense over any number system: we can graph \(x^2 + y^2 = 1\) over the real numbers, over the complex numbers, or ask about its solutions modulo \(p\) for a prime number \(p.\) Grothendieck was incredibly curious as to how \emph{geometric} properties of the graph of \(x^2 + y^2 = 1\) over the complex numbers might correspond to \emph{combinatorial} or \emph{number-theoretic} properties of the set of solutions to \(x^2 + y^2 = 1\) modulo \(p.\) Georges de Rham realized that solutions to differential equations reveal a lot about the geometry of a shape, through what is now called \emph{de Rham cohomology}, and thus the Grothendieck-Katz \(p\)-curvature conjecture is one especially exciting avenue towards relating geometry and number theory.
+
+\cvsection{My work}
+
+		\textbf{Logarithmic de Rham stacks and Non-Abelian Hodge Theory}\\ \emph{submitted for publication; available on \href{arXiv}{https://arxiv.org/abs/2512.04300}}\\
+		\hspace*{2em}\begin{minipage}{0.92\textwidth}
+In exploring a non-linear variant of the Grothendieck-Katz \(p\)-curvature conjecture, I developed a certain machine (which I call the \emph{logarithmic de Rham stack}) which I noticed could prove strengthened versions of some previous results in non-abelian Hodge theory, and my advisor Bhargav Bhatt suggested I take some time to write up and publish these results.	\end{minipage}
+
+\cvsection{Selected talks}
+
+% Stony-Brook ag seminar
+% frank's oberwolfach
+
+\end{document}
