@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicago REU 2026 Lectures</title>
+  <style>
+    /* Gruvbox dark palette */
+    :root {
+      --bg:       #282828;
+      --bg1:      #3c3836;
+      --bg2:      #504945;
+      --fg:       #ebdbb2;
+      --fg2:      #d5c4a1;
+      --fg4:      #a89984;
+      --red-b:    #fb4934;
+      --green-b:  #b8bb26;
+      --yellow:   #d79921;
+      --yellow-b: #fabd2f;
+      --blue-b:   #83a598;
+      --aqua-b:   #8ec07c;
+      --orange-b: #fe8019;
+      --gray:     #928374;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: monospace;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--yellow-b);
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: var(--fg4);
+      font-size: 0.95rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* PDF download banner */
+    .pdf-banner {
+      background-color: var(--bg1);
+      border: 1px solid var(--yellow);
+      border-radius: 2px;
+      padding: 0.85rem 1.1rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pdf-banner .pdf-label {
+      color: var(--fg4);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .pdf-banner a {
+      color: var(--yellow-b);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .pdf-banner a:hover {
+      color: var(--aqua-b);
+      text-decoration: underline;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--bg2);
+      margin: 1.5rem 0;
+    }
+
+    /* REU directory listing block */
+    .directory-block {
+      margin-bottom: 0.5rem;
+    }
+
+    .directory-block .dir-title {
+      color: var(--fg);
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    .directory-block .dir-title span {
+      color: var(--orange-b);
+    }
+
+    .directory-block .dir-abstract {
+      color: var(--fg2);
+      font-size: 0.93rem;
+      line-height: 1.65;
+    }
+
+    h3 {
+      color: var(--green-b);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Lecture notes big link */
+    .notes-link-block {
+      margin-bottom: 1.5rem;
+    }
+
+    .notes-link-block a {
+      color: var(--blue-b);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .notes-link-block a:hover {
+      color: var(--aqua-b);
+      text-decoration: underline;
+    }
+
+    .notes-link-block .notes-sub {
+      color: var(--fg4);
+      font-size: 0.88rem;
+      margin-top: 0.1rem;
+    }
+
+    /* Lectures list */
+    .lectures { list-style: none; }
+
+    .lectures li { margin-bottom: 1.6rem; }
+
+    .lecture-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .lecture-num {
+      color: var(--orange-b);
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .lecture-title {
+      color: var(--fg);
+      font-weight: bold;
+    }
+
+    .lecture-desc {
+      color: var(--fg4);
+      font-size: 0.9rem;
+      padding-left: 3.5rem;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--blue-b);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--aqua-b);
+      text-decoration: underline;
+    }
+
+    .note {
+      color: var(--fg4);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Chicago REU 2026 Lectures</h1>
+  <div class="subtitle">These are lecture notes for a series of 7 lectures given at the Chicago REU, in the summer of 2026, on algebraic geometry. We give a slightly non-standard introduction to the subject.</div>
+
+  <!-- PDF download banner -->
+  <div class="pdf-banner">
+    <span class="pdf-label">lecture notes &rarr;</span>
+    <a href="reu2026.pdf">reu2026.pdf</a>
+  </div>
+
+  <hr>
+
+  <!-- REU directory listing -->
+  <div class="directory-block">
+    <div class="dir-title"><span>Title:</span> Calculus mod 5</div>
+    <div class="dir-title" style="margin-bottom: 0.5rem;"><span>Abstract:</span></div>
+    <div class="dir-abstract">
+      Algebraic geometry is the study of shapes defined by systems of polynomial equations. This might seem a very strange class of shapes to single out. However, one advantage of a polynomial equation like <em>y</em> = <em>x</em>&sup2; is that it makes sense over many different number systems &ndash; you can solve it over the complex numbers, you can solve it over the integers, or you could solve it in modular arithmetic. A remarkable phenomenon in algebraic geometry is that these different incarnations of the shape somehow know about each other: you can predict the topology of the shape over the complex numbers by knowing about its incarnations over finite fields, for example. We are going to try and explore basic notions in algebraic geometry, starting with the idea of the functor of points of an algebraic variety. We will have a strong bias towards exploring how to do calculus (in the guise of &lsquo;algebraic de Rham cohomology&rsquo;) over different number systems, and how these new notions of calculus relate to calculus over the complex numbers. No background in commutative algebra or algebraic geometry will be assumed, but we will assume the audience knows what a ring is, and is comfortable with standard topics in multivariable calculus and linear algebra.
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>Lectures</h3>
+
+  <ul class="lectures">
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 1.</span>
+        <span class="lecture-title">What is algebraic geometry?</span>
+      </div>
+      <div class="lecture-desc">We try to explain how and why to study shapes defined by systems of polynomial equations.</div>
+    </li>
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 2.</span>
+        <span class="lecture-title">Title TBD</span>
+      </div>
+      <div class="lecture-desc">[description forthcoming]</div>
+    </li>
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 3.</span>
+        <span class="lecture-title">Title TBD</span>
+      </div>
+      <div class="lecture-desc">[description forthcoming]</div>
+    </li>
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 4.</span>
+        <span class="lecture-title">Title TBD</span>
+      </div>
+      <div class="lecture-desc">[description forthcoming]</div>
+    </li>
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 5.</span>
+        <span class="lecture-title">Title TBD</span>
+      </div>
+      <div class="lecture-desc">[description forthcoming]</div>
+    </li>
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 6.</span>
+        <span class="lecture-title">Title TBD</span>
+      </div>
+      <div class="lecture-desc">[description forthcoming]</div>
+    </li>
+
+    <li>
+      <div class="lecture-header">
+        <span class="lecture-num">Lecture 7.</span>
+        <span class="lecture-title">Title TBD</span>
+      </div>
+      <div class="lecture-desc">[description forthcoming]</div>
+    </li>
+
+  </ul>
+
+  <hr>
+
+  <div class="note">
+    Please send corrections to <strong>michaelbarz AT princeton DOT edu</strong>.
+  </div>
+
+  <footer>
+    <br>
+    &larr; <a href="https://michael.dog">back to homepage</a>
+  </footer>
+
+</body>
+</html>
