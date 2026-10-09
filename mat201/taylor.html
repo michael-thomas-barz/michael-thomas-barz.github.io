@@ -154,7 +154,6 @@
     <p class="render-status" id="render-status" role="status" hidden>The math renderer didn’t load. Please refresh the page to render the formulas.</p>
     <div class="controls">
       <button type="button" id="previous" disabled>Previous</button>
-      <span class="hint">Step through the orders, then collect the mixed terms.</span>
       <button type="button" id="next" class="next">Next</button>
     </div>
     <noscript><p>Enable JavaScript to step through the formulas.</p></noscript>
@@ -168,7 +167,7 @@
     <div class="widget-heading">
       <h2 id="error-widget-title">How large can the error be?</h2>
     </div>
-    <p class="error-context">Write <span class="tex" data-tex="T_1">T₁</span> for the linear Taylor polynomial and <span class="tex" data-tex="T_2">T₂</span> for the quadratic one. Choose a rectangle containing the center <span class="tex" data-tex="(a,b)">(a, b)</span> and the point <span class="tex" data-tex="(x,y)">(x, y)</span>, with <span class="tex" data-tex="f">f</span> smooth throughout that rectangle.</p>
+    <p class="error-context">Write <span class="tex" data-tex="T_1">T₁</span> for the linear Taylor polynomial and <span class="tex" data-tex="T_2">T₂</span> for the quadratic one. 
     <div class="orders error-tabs" role="tablist" aria-label="Order of the approximation whose error is bounded">
       <button class="error-tab" id="error-order-1" type="button" role="tab" aria-selected="true" aria-controls="error-panel" tabindex="0" data-error-order="1">First order</button>
       <button class="error-tab" id="error-order-2" type="button" role="tab" aria-selected="false" aria-controls="error-panel" tabindex="-1" data-error-order="2">Second order</button>
@@ -179,7 +178,7 @@
         <p id="error-caption">Always go to the <em>next order</em> to calculate an error bound: for a first-order approximation, bound the <em>second</em> derivatives.</p>
       </div>
       <div class="error-equation tex" id="error-equation" data-display="true" data-tex="|f(x,y)-T_1(x,y)|\leq\frac{M_2}{2!}\bigl(|x-a|+|y-b|\bigr)^2">|f(x, y) − T₁(x, y)| ≤ M₂/2 (|x − a| + |y − b|)²</div>
-      <p class="error-definition" id="error-definition">Here <span class="tex" data-tex="M_2">M₂</span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="|f_{xx}|,\,|f_{xy}|,\,|f_{yx}|,\,|f_{yy}|"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.</p>
+      <p class="error-definition" id="error-definition">Here <span class="tex" data-tex="M_2">M₂</span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="|f_{xx}|,\,|f_{xy}|,\,|f_{yx}|,\,|f_{yy}|"></span>—anywhere in a region containing (x, y) and (a, b). Bound the derivatives over the whole rectangle, not just at its center.</p>
     </div>
     <noscript><p>For the quadratic approximation, the bound is M₃/6 (|x − a| + |y − b|)³, where M₃ bounds every third derivative throughout the rectangle.</p></noscript>
   </section>
@@ -247,13 +246,13 @@
       title:'Error in the linear approximation',
       caption:'Always go to the <em>next order</em> to calculate an error bound: for a first-order approximation, bound the <em>second</em> derivatives.',
       formula:tex`|f(x,y)-T_1(x,y)|\leq\frac{M_2}{2!}\bigl(|x-a|+|y-b|\bigr)^2`,
-      definition:'Here <span class="tex" data-tex="M_2"></span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="|f_{xx}|,\\,|f_{xy}|,\\,|f_{yx}|,\\,|f_{yy}|"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
+      definition:'Here <span class="tex" data-tex="M_2"></span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="|f_{xx}|,\\,|f_{xy}|,\\,|f_{yx}|,\\,|f_{yy}|"></span>—anywhere in a region containing (x, y) and (a, b). Remember to bound the derivatives over the whole region, not just at (a, b)!"
     },
     2: {
       title:'Error in the quadratic approximation',
       caption:'Always go to the <em>next order</em> to calculate an error bound: for a second-order approximation, bound the <em>third</em> derivatives.',
       formula:tex`|f(x,y)-T_2(x,y)|\leq\frac{M_3}{3!}\bigl(|x-a|+|y-b|\bigr)^3`,
-            definition:'Here <span class="tex" data-tex="M_3"></span> is the maximum absolute value of <em>any</em> of the possible third derivatives: <span class="tex" data-tex="|f_{xxx}|, |f_{xxy}|, |f_{xyy}|, |f_{yyy}|"></span>, anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
+            definition:'Here <span class="tex" data-tex="M_3"></span> is the maximum absolute value of <em>any</em> of the possible third derivatives: <span class="tex" data-tex="|f_{xxx}|, |f_{xxy}|, |f_{xyy}|, |f_{yyy}|"></span>, over some region containing (a, b) and (x,y). Remember to bound the derivatives over the whole rectangle, not just at (a, b)!'
     }
   };
 
