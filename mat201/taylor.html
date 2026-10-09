@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Taylor polynomials in two variables, through third order, with first- and second-order error bounds and a worked example.">
+  <title>Taylor series in two variables · Michael Barz</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23282828'/%3E%3Ctext x='7' y='25' font-family='Georgia' font-style='italic' font-size='27' fill='%23fabd2f'%3ET%3C/text%3E%3C/svg%3E">
+  <!-- KaTeX, the LaTeX renderer used by Hidden Phenomena. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css" integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js" integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg:#282828; --panel:#242424; --soft:#32302f; --fg:#ebdbb2;
+      --muted:#bdae93; --line:#504945; --yellow:#fabd2f; --blue:#83a598;
+      --green:#b8bb26; --purple:#d3869b;
+    }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; background:var(--bg); color:var(--fg); font:1.0625rem/1.65 Georgia,'Times New Roman',serif; }
+    main { max-width:1000px; margin:auto; padding:36px 28px 48px; }
+    a { color:var(--yellow); text-underline-offset:4px; }
+    .masthead { display:flex; gap:18px; align-items:center; margin:0 0 24px; color:var(--muted); font:0.875rem/1.5 system-ui,sans-serif; }
+    .masthead a { color:var(--fg); text-decoration:none; }
+    .masthead span { border-left:1px solid var(--line); padding-left:18px; }
+    h1 { margin:0 0 18px; font-size:clamp(2rem,4.5vw,2.7rem); font-weight:normal; line-height:1.17; letter-spacing:-.025em; }
+    .intro { max-width:780px; }
+    p { margin:0 0 15px; }
+    .recall { color:var(--muted); }
+    .katex { font-size:1.07em; }
+    .one-variable { margin:17px 0 21px; overflow-x:auto; padding:4px 0 8px; color:var(--fg); }
+    .one-variable .katex { font-size:1.2rem; }
+    .one-variable .katex-display { margin:0; text-align:left; }
+    .one-variable .katex-display > .katex { text-align:left; }
+    .widget { margin-top:25px; border:1px solid var(--line); background:var(--panel); border-radius:8px; overflow:hidden; }
+    .widget-heading { padding:20px 24px 0; display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+    .widget-heading h2 { margin:0; font:500 1rem/1.5 system-ui,sans-serif; }
+    .stage-count { color:var(--muted); font:0.875rem/1.5 system-ui,sans-serif; white-space:nowrap; }
+    .assumption { margin:5px 24px 0; color:var(--muted); font-size:.9375rem; }
+    .orders { display:flex; flex-wrap:wrap; gap:7px; margin:18px 24px 0; }
+    button { font:inherit; }
+    .order-tab, .error-tab { min-height:42px; padding:7px 14px; color:var(--muted); background:transparent; border:1px solid var(--line); border-radius:4px; cursor:pointer; font:0.9375rem/1.5 system-ui,sans-serif; }
+    .order-tab[aria-selected="true"], .error-tab[aria-selected="true"] { color:var(--bg); background:var(--yellow); border-color:var(--yellow); }
+    .order-tab:hover, .error-tab:hover { border-color:var(--muted); }
+    button:focus-visible, a:focus-visible { outline:2px solid var(--yellow); outline-offset:4px; }
+    .mode-tabs { display:flex; gap:20px; margin:18px 24px 0; border-bottom:1px solid var(--line); }
+    .mode-tab { min-height:40px; padding:3px 1px 9px; border:0; border-bottom:2px solid transparent; cursor:pointer; color:var(--muted); background:transparent; font:0.9375rem/1.5 system-ui,sans-serif; }
+    .mode-tab[aria-selected="true"] { color:var(--fg); border-bottom-color:var(--fg); }
+    .caption { margin:20px 24px 17px; min-height:56px; }
+    .caption h3 { margin:0 0 7px; font-size:1.35rem; font-weight:normal; line-height:1.3; }
+    .caption p { margin:0; font-size:1rem; line-height:1.65; color:var(--muted); }
+    .caption em { color:var(--fg); }
+    .equation { margin:0 24px 24px; font-size:1.1rem; }
+    .degree { display:flex; flex-wrap:wrap; align-items:baseline; gap:11px 20px; margin-top:15px; color:var(--muted); }
+    .degree:first-child { margin-top:0; }
+    .degree[data-order="0"].current { color:var(--yellow); }
+    .degree[data-order="1"].current { color:var(--blue); }
+    .degree[data-order="2"].current { color:var(--green); }
+    .degree[data-order="3"].current { color:var(--purple); }
+    .term { display:block; max-width:100%; overflow-x:auto; padding:3px 0 6px; }
+    .degree[data-order="3"] .term { flex-basis:calc(50% - 10px); 
+    }
+    .degree[data-order="3"] .term:only-child {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+    .controls { display:flex; align-items:center; justify-content:space-between; gap:14px; border-top:1px solid var(--line); padding:16px 24px 20px; }
+    .controls button { min-height:42px; border:1px solid var(--line); border-radius:4px; padding:8px 17px; cursor:pointer; font:0.9375rem/1.5 system-ui,sans-serif; color:var(--fg); background:var(--soft); }
+    .controls .next { color:var(--bg); background:var(--yellow); border-color:var(--yellow); }
+    .controls button:disabled { opacity:.38; cursor:default; }
+    .controls .hint { color:var(--muted); font:0.875rem/1.5 system-ui,sans-serif; }
+    .render-status { margin:12px 24px; color:var(--muted); font:0.9375rem/1.5 system-ui,sans-serif; }
+    noscript p { margin:0; padding:20px 24px; color:var(--muted); }
+    .error-context, .error-definition { margin:15px 24px; font-size:1rem; line-height:1.65; color:var(--muted); }
+    .error-context { margin-top:9px; }
+    .error-widget .caption em { color:var(--yellow); font-weight:bold; }
+    .error-equation { margin:20px 24px; padding:8px 0 12px; overflow-x:auto; font-size:1.1rem; color:var(--green); }
+    .error-equation .katex-display, .worked-example .katex-display { margin:0; text-align:left; }
+    .error-equation .katex-display > .katex, .worked-example .katex-display > .katex { text-align:left; }
+    .error-definition { margin-bottom:24px; }
+    .worked-example { margin-top:30px; max-width:850px; }
+    .worked-example h2 { margin:0 0 15px; font-size:1.65rem; line-height:1.3; font-weight:normal; }
+    .worked-example h3 { margin:24px 0 10px; font-size:1.2rem; line-height:1.35; font-weight:normal; color:var(--yellow); }
+    .example-equation { margin:16px 0 20px; padding:6px 0 10px; overflow-x:auto; color:var(--fg); }
+    .example-bound { color:var(--green); }
+    .example-reminder { padding-left:14px; border-left:2px solid var(--yellow); color:var(--muted); }
+    @media (max-width:600px) {
+      main { padding:24px 16px 32px; }
+      .masthead { margin-bottom:20px; }
+      .widget-heading { padding:17px 16px 0; }
+      .assumption { margin-left:16px; margin-right:16px; }
+      .orders { margin-left:16px; margin-right:16px; gap:6px; }
+      .order-tab, .error-tab { flex:1 1 calc(50% - 6px); padding:7px 10px; }
+      .mode-tabs { margin-left:16px; margin-right:16px; }
+      .caption { margin-left:16px; margin-right:16px; }
+      .equation { margin-left:16px; margin-right:16px; font-size:1rem; }
+      .degree { gap:9px 15px; }
+      .degree[data-order="3"] .term { flex-basis:100%; }
+      .controls { padding:16px; }
+      .controls .hint { display:none; }
+      .render-status { margin-left:16px; margin-right:16px; }
+      .error-context, .error-definition, .error-equation { margin-left:16px; margin-right:16px; }
+      .error-equation { font-size:1rem; }
+    }
+    @media (min-width:601px) and (max-width:850px) {
+      .degree[data-order="3"] .term { flex-basis:100%; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Taylor series in two variables</h1>
+  <div class="intro">
+
+          <h2>Reminders of calculus</h2>
+    <p>Remember that, in one variable, the Taylor series of <span class="tex" data-tex="f(x)">f(x)</span> centered at <span class="tex" data-tex="x=a">x = a</span> was</p>
+    <div class="one-variable tex" data-display="true" data-tex="f(x)\approx f(a)+f'(a)(x-a)+\frac{1}{2}f''(a)(x-a)^2+\frac{1}{3!}f'''(a)(x-a)^3+\cdots">f(x) ≈ f(a) + f′(a)(x − a) + ½f″(a)(x − a)² + ⋯</div>
+    <p>We should think of this as approximating the function using what we know at one point.</p>
+
+    <h2>Going to two variables</h2>
+
+    <p>In two variables, there isn’t just a single first or second derivative—there are many! So, when you're doing Taylor series in 2 variables, you use the same basic format as in 1-dimension, but you need to account for <em>all possible derivatives</em>. To show you what I mean, try stepping through (use the 'Next' button on the bottom right) the widget below.
+    </p>
+  </div>
+
+  <section class="widget" aria-labelledby="widget-title">
+    <div class="widget-heading">
+      <h2 id="widget-title">Build the Taylor polynomial</h2>
+      <span class="stage-count" id="stage-count">Step 1 of 6</span>
+    </div>
+    <p class="assumption">Assume <span class="tex" data-tex="f">f</span> is smooth near <span class="tex" data-tex="(a,b)">(a, b)</span>.</p>
+    <div class="orders" role="tablist" aria-label="Taylor polynomial order">
+      <button class="order-tab" id="order-0" type="button" role="tab" aria-selected="true" aria-controls="taylor-panel" tabindex="0" data-order="0">Zeroth order</button>
+      <button class="order-tab" id="order-1" type="button" role="tab" aria-selected="false" aria-controls="taylor-panel" tabindex="-1" data-order="1">First order</button>
+      <button class="order-tab" id="order-2" type="button" role="tab" aria-selected="false" aria-controls="taylor-panel" tabindex="-1" data-order="2">Second order</button>
+      <button class="order-tab" id="order-3" type="button" role="tab" aria-selected="false" aria-controls="taylor-panel" tabindex="-1" data-order="3">Third order</button>
+    </div>
+    <div class="mode-tabs" id="mode-tabs" role="tablist" aria-label="Write out or simplify the derivatives" hidden>
+      <button class="mode-tab" id="mode-raw" type="button" role="tab" aria-selected="true" aria-controls="formula-panel" tabindex="0" data-mode="raw">All derivatives</button>
+      <button class="mode-tab" id="mode-simplified" type="button" role="tab" aria-selected="false" aria-controls="formula-panel" tabindex="-1" data-mode="simplified">Simplified</button>
+    </div>
+    <div id="taylor-panel" role="tabpanel" aria-labelledby="order-0">
+      <div id="formula-panel">
+        <div class="caption" aria-live="polite" aria-atomic="true">
+          <h3 id="step-title">Zeroth order</h3>
+          <p id="step-caption">Use the value of the function at our center.</p>
+        </div>
+        <div class="equation" id="equation" role="group" aria-label="Zeroth-order Taylor approximation">
+          <div class="degree current" data-order="0"><span class="term tex" data-tex="f(x,y)\approx f(a,b)">f(x, y) ≈ f(a, b)</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="render-status" id="render-status" role="status" hidden>The math renderer didn’t load. Please refresh the page to render the formulas.</p>
+    <div class="controls">
+      <button type="button" id="previous" disabled>Previous</button>
+      <span class="hint">Step through the orders, then collect the mixed terms.</span>
+      <button type="button" id="next" class="next">Next</button>
+    </div>
+    <noscript><p>Enable JavaScript to step through the formulas.</p></noscript>
+  </section>
+
+  <h2>How good is the Taylor approximation?</h2>
+
+  <p>An approximation is only useful if you know how good of an approximation it is. These Taylor series give you an approximation to some function -- how good is that approximation?</p>
+
+  <section class="widget error-widget" aria-labelledby="error-widget-title">
+    <div class="widget-heading">
+      <h2 id="error-widget-title">How large can the error be?</h2>
+    </div>
+    <p class="error-context">Write <span class="tex" data-tex="T_1">T₁</span> for the linear Taylor polynomial and <span class="tex" data-tex="T_2">T₂</span> for the quadratic one. Choose a rectangle containing the center <span class="tex" data-tex="(a,b)">(a, b)</span> and the point <span class="tex" data-tex="(x,y)">(x, y)</span>, with <span class="tex" data-tex="f">f</span> smooth throughout that rectangle.</p>
+    <div class="orders error-tabs" role="tablist" aria-label="Order of the approximation whose error is bounded">
+      <button class="error-tab" id="error-order-1" type="button" role="tab" aria-selected="true" aria-controls="error-panel" tabindex="0" data-error-order="1">First order</button>
+      <button class="error-tab" id="error-order-2" type="button" role="tab" aria-selected="false" aria-controls="error-panel" tabindex="-1" data-error-order="2">Second order</button>
+    </div>
+    <div id="error-panel" role="tabpanel" aria-labelledby="error-order-1">
+      <div class="caption" aria-live="polite" aria-atomic="true">
+        <h3 id="error-step-title">Error in the linear approximation</h3>
+        <p id="error-caption">Always go to the <em>next order</em> to calculate an error bound: for a first-order approximation, bound the <em>second</em> derivatives.</p>
+      </div>
+      <div class="error-equation tex" id="error-equation" data-display="true" data-tex="|f(x,y)-T_1(x,y)|\leq\frac{M_2}{2!}\bigl(|x-a|+|y-b|\bigr)^2">|f(x, y) − T₁(x, y)| ≤ M₂/2 (|x − a| + |y − b|)²</div>
+      <p class="error-definition" id="error-definition">Here <span class="tex" data-tex="M_2">M₂</span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="f_{xx},\,f_{xy},\,f_{yx},\,f_{yy}"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.</p>
+    </div>
+    <noscript><p>For the quadratic approximation, the bound is M₃/6 (|x − a| + |y − b|)³, where M₃ bounds every third derivative throughout the rectangle.</p></noscript>
+  </section>
+</main>
+<script>
+(() => {
+  'use strict';
+  const tex = String.raw;
+  // Keep the two displacement factors explicit in every displayed term.
+  const linear = [
+    tex`{}+ f_x(a,b)(x-a)`,
+    tex`{}+ f_y(a,b)(y-b)`
+  ];
+  const quadraticRaw = [
+    tex`{}+ \frac{1}{2!}f_{xx}(a,b)(x-a)^2`,
+    tex`{}+ \frac{1}{2!}f_{xy}(a,b)(x-a)(y-b)`,
+    tex`{}+ \frac{1}{2!}f_{yx}(a,b)(y-b)(x-a)`,
+    tex`{}+ \frac{1}{2!}f_{yy}(a,b)(y-b)^2`
+  ];
+  const quadraticSimplified = [
+          tex`{}+\frac{1}{2}\left(f_{xx}(a,b)(x-a)^2 + 2f_{xy}(a,b)(x-a)(y-b) + f_{yy}(a,b)(y-b)^2\right)`,
+  ];
+  const cubicRaw = [
+    tex`{}+ \frac{1}{3!}f_{xxx}(a,b)(x-a)^3`,
+    tex`{}+ \frac{1}{3!}f_{xxy}(a,b)(x-a)^2(y-b)`,
+    tex`{}+ \frac{1}{3!}f_{xyx}(a,b)(x-a)(y-b)(x-a)`,
+    tex`{}+ \frac{1}{3!}f_{xyy}(a,b)(x-a)(y-b)^2`,
+    tex`{}+ \frac{1}{3!}f_{yxx}(a,b)(y-b)(x-a)^2`,
+    tex`{}+ \frac{1}{3!}f_{yxy}(a,b)(y-b)(x-a)(y-b)`,
+    tex`{}+ \frac{1}{3!}f_{yyx}(a,b)(y-b)^2(x-a)`,
+    tex`{}+ \frac{1}{3!}f_{yyy}(a,b)(y-b)^3`
+  ];
+  const cubicSimplified = [
+          tex`{}+\frac{1}{6}\left(f_{xxx}(a,b)(x-a)^3 + 3f_{xxy}(a,b)(x-a)^2(y-b)+3f_{xyy}(a,b)(x-a)(y-b)^2 + f_{yyy}(a,b)(y-b)^3\right)`,
+  ];
+  const slides = [
+    {
+      order:0, mode:'raw', title:'Zeroth order',
+      caption:'Use the value of the function at our center.'
+    },
+    {
+      order:1, mode:'raw', title:'First order',
+      caption:'Use <em>both</em> possible first derivatives.'
+    },
+    {
+      order:2, mode:'raw', title:'Second order',
+      caption:'Use <em>all four</em> possible second derivatives, and remember to include the 1/2!.'
+    },
+    {
+      order:2, mode:'simplified', title:'Second order, collected',
+      caption:'Remember that <span class="tex" data-tex="f_{xy}=f_{yx}"></span>, so we can collect thme together to simplify the formula.'
+    },
+    {
+      order:3, mode:'raw', title:'Third order',
+      caption:'Use <em>all eight</em> possible third derivatives.'
+    },
+    {
+      order:3, mode:'simplified', title:'Third order, collected',
+      caption:'Now <span class="tex" data-tex="f_{xxy}=f_{xyx}=f_{yxx}"></span> and <span class="tex" data-tex="f_{xyy}=f_{yxy}=f_{yyx}"></span>. Each group of three equal mixed terms combines into one.'
+    }
+  ];
+
+  const errorBounds = {
+    1: {
+      title:'Error in the linear approximation',
+      caption:'Always go to the <em>next order</em> to calculate an error bound: for a first-order approximation, bound the <em>second</em> derivatives.',
+      formula:tex`|f(x,y)-T_1(x,y)|\leq\frac{M_2}{2!}\bigl(|x-a|+|y-b|\bigr)^2`,
+      definition:'Here <span class="tex" data-tex="M_2"></span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="f_{xx},\\,f_{xy},\\,f_{yx},\\,f_{yy}"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
+    },
+    2: {
+      title:'Error in the quadratic approximation',
+      caption:'Always go to the <em>next order</em> to calculate an error bound: for a second-order approximation, bound the <em>third</em> derivatives.',
+      formula:tex`|f(x,y)-T_2(x,y)|\leq\frac{M_3}{3!}\bigl(|x-a|+|y-b|\bigr)^3`,
+            definition:'Here <span class="tex" data-tex="M_3"></span> is the maximum absolute value of <em>any</em> of the possible third derivatives: <span class="tex" data-tex="f_{xxx}, f_{xxy}, f_{xyy}, f_{yyy}"></span>, anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
+    }
+  };
+
+  let slide = 0;
+  let elements;
+  function typeset(root) {
+    const nodes = [...root.querySelectorAll('.tex')];
+    if (root.classList.contains('tex')) nodes.unshift(root);
+    for (const node of nodes) {
+      if (!window.katex) {
+        if (!node.textContent) node.textContent = node.dataset.tex;
+        continue;
+      }
+      try {
+        window.katex.render(node.dataset.tex, node, {
+          displayMode:node.dataset.display==='true',
+          throwOnError:true,
+          output:'htmlAndMathml'
+        });
+      } catch (error) {
+        node.textContent = node.dataset.tex;
+        document.getElementById('render-status').hidden = false;
+        console.error('Could not render formula:', error);
+      }
+    }
+  }
+
+  function appendDegree(order, terms, currentOrder) {
+    const row = document.createElement('div');
+    row.className = 'degree' + (order===currentOrder?' current':'');
+    row.dataset.order = String(order);
+    for (const term of terms) {
+      const node = document.createElement('span');
+      node.className = 'term tex';
+      node.dataset.tex = term;
+      row.append(node);
+    }
+    elements.equation.append(row);
+  }
+
+  function showSlide(index) {
+    slide = Math.max(0,Math.min(slides.length-1,index));
+    const current = slides[slide];
+    elements.title.textContent = current.title;
+    elements.caption.innerHTML = current.caption;
+    elements.count.textContent = 'Step '+(slide+1)+' of '+slides.length;
+    elements.panel.setAttribute('aria-labelledby','order-'+current.order);
+    for (const tab of elements.orderTabs) {
+      const active = Number(tab.dataset.order)===current.order;
+      tab.setAttribute('aria-selected',String(active));
+      tab.tabIndex = active?0:-1;
+    }
+    elements.modes.hidden = current.order<2;
+    if (current.order>=2) {
+      elements.formulaPanel.setAttribute('role','tabpanel');
+      elements.formulaPanel.setAttribute('aria-labelledby','mode-'+current.mode);
+    } else {
+      elements.formulaPanel.removeAttribute('role');
+      elements.formulaPanel.removeAttribute('aria-labelledby');
+    }
+    for (const tab of elements.modeTabs) {
+      const active = tab.dataset.mode===current.mode;
+      tab.setAttribute('aria-selected',String(active));
+      tab.tabIndex = active?0:-1;
+    }
+    elements.equation.replaceChildren();
+    appendDegree(0,[tex`f(x,y)\approx f(a,b)`],current.order);
+    if (current.order>=1) appendDegree(1,linear,current.order);
+    if (current.order>=2) appendDegree(2,
+      current.order===2 && current.mode==='raw'?quadraticRaw:quadraticSimplified,
+      current.order);
+    if (current.order===3) appendDegree(3,
+      current.mode==='raw'?cubicRaw:cubicSimplified,current.order);
+    elements.equation.setAttribute('aria-label',current.title+' Taylor approximation');
+    elements.previous.disabled = slide===0;
+    elements.next.disabled = slide===slides.length-1;
+    elements.next.textContent = (slide===2 || slide===4)?'Collect terms':(slide===3?'Third order':'Next');
+    typeset(elements.equation);
+    typeset(elements.caption);
+  }
+
+  function initialize() {
+    elements = {
+      orderTabs:[...document.querySelectorAll('.order-tab')],
+      modeTabs:[...document.querySelectorAll('.mode-tab')],
+      modes:document.getElementById('mode-tabs'),
+      panel:document.getElementById('taylor-panel'),
+      formulaPanel:document.getElementById('formula-panel'),
+      title:document.getElementById('step-title'),
+      caption:document.getElementById('step-caption'),
+      count:document.getElementById('stage-count'),
+      equation:document.getElementById('equation'),
+      previous:document.getElementById('previous'),
+      next:document.getElementById('next')
+    };
+    typeset(document.querySelector('main'));
+    document.getElementById('render-status').hidden = Boolean(window.katex);
+    const orderStarts = [0,1,2,4];
+    elements.orderTabs.forEach(tab=>tab.addEventListener('click',()=>{
+      showSlide(orderStarts[Number(tab.dataset.order)]);
+    }));
+    elements.modeTabs.forEach(tab=>tab.addEventListener('click',()=>{
+      showSlide((slides[slide].order===2?2:4)+(tab.dataset.mode==='simplified'?1:0));
+    }));
+    elements.previous.addEventListener('click',()=>showSlide(slide-1));
+    elements.next.addEventListener('click',()=>showSlide(slide+1));
+
+    // Each tablist follows the standard left/right, Home/End keyboard behavior.
+    function wireTabKeys(tablist, tabs, activate) {
+      tablist.addEventListener('keydown',event=>{
+        if (event.altKey || event.ctrlKey || event.metaKey) return;
+        if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+        const currentIndex = tabs.indexOf(event.target);
+        if (currentIndex<0) return;
+        event.preventDefault();
+        let index = currentIndex;
+        if (event.key==='ArrowRight') index=(index+1)%tabs.length;
+        if (event.key==='ArrowLeft') index=(index+tabs.length-1)%tabs.length;
+        if (event.key==='Home') index=0;
+        if (event.key==='End') index=tabs.length-1;
+        activate(tabs[index]);
+        tabs[index].focus();
+      });
+    }
+    wireTabKeys(document.querySelector('.orders'),elements.orderTabs,tab=>{
+      showSlide(orderStarts[Number(tab.dataset.order)]);
+    });
+    wireTabKeys(elements.modes,elements.modeTabs,tab=>{
+      showSlide((slides[slide].order===2?2:4)+(tab.dataset.mode==='simplified'?1:0));
+    });
+    const errorTabs = [...document.querySelectorAll('.error-tab')];
+    const errorPanel = document.getElementById('error-panel');
+    const errorFormula = document.getElementById('error-equation');
+    const errorCaption = document.getElementById('error-caption');
+    const errorDefinition = document.getElementById('error-definition');
+    function showErrorBound(order) {
+      const bound = errorBounds[order];
+      document.getElementById('error-step-title').textContent = bound.title;
+      errorCaption.innerHTML = bound.caption;
+      errorDefinition.innerHTML = bound.definition;
+      errorFormula.dataset.tex = bound.formula;
+      errorFormula.textContent = bound.formula;
+      errorPanel.setAttribute('aria-labelledby','error-order-'+order);
+      for (const tab of errorTabs) {
+        const active = Number(tab.dataset.errorOrder)===order;
+        tab.setAttribute('aria-selected',String(active));
+        tab.tabIndex = active?0:-1;
+      }
+      typeset(errorFormula);
+      typeset(errorCaption);
+      typeset(errorDefinition);
+    }
+    errorTabs.forEach(tab=>tab.addEventListener('click',()=>{
+      showErrorBound(Number(tab.dataset.errorOrder));
+    }));
+    wireTabKeys(document.querySelector('.error-tabs'),errorTabs,tab=>{
+      showErrorBound(Number(tab.dataset.errorOrder));
+    });
+    showSlide(0);
+    showErrorBound(1);
+  }
+
+  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',initialize,{once:true});
+  else initialize();
+})();
+</script>
+</body>
+</html>

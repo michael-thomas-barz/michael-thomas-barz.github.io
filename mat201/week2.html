@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Week 2: Cross products</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- KaTeX -->
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body);">
+  </script>
+</head>
+<body>
+
+<a href="index.html">← back</a>
+
+<h1>Week 2: Cross products</h1>
+<p class="meta">September 11, 2026</p>
+
+<h2>Dot products</h2>
+
+<p>
+To begin, let's review the <em>dot product</em> of two vectors. 
+</p>
+
+<h2>Cross products</h2>
+
+<p>
+The <em>cross product</em> is a variant of the dot product. You input two 3-dimensional vectors, and it outputs another <em>vector</em> (notice -- the dot product outputs a number, but the cross product outputs a vector). 
+</p>
+
+<p>
+We write \(\vec{v} \times \vec{w}\) to denote the cross product of \(\vec{v}\) and \(\vec{w}.\) 
+</p>
+
+<p>
+The cross product, being a vector, has a length and a direction. The <em>length</em> of the cross product is the area of the parallelogram spanned by \(\vec{v}\) and \(\vec{w}\) (see the widget below). TODO
+</p>
+
+<p>
+The <em>direction</em> of the cross product is always the normal to the parallelogram. This means that it is always perpendicular to that parallelogram; you can play with the widget below to see examples. TODO
+</p>
+
+<h2>The right-hand rule</h2>
+
+<p>
+There is one small issue with using the geometric interpretation just given: to any surface in 3-dimensional space, there are <em>two</em> normal vectors, pointing in exact opposite directions. TODO
+</p>
+
+<p>
+So, which way does the dot product use? To determine it, you use the <em>right-hand rule</em>. TODO widget
+</p>
+
+<p>
+Warning: the right hand rule implies \(\vec{v} \times \vec{w}\) is NOT the same as \(\vec{w} \times \vec{v},\) instead they are negatives, todo.
+</p>
+
+<h2>Calculating cross products</h2>
+
+<p>
+How do you actually calculate cross products? For this, we need to remember how areas are computed. 
+</p>
+
+<p>
+TODO: 2x2 determinant
+</p>
+
+<p>
+A similar trick can be used to compute the cross product. TODO 3x3 determinant thing, emphasize how it is made of 2x2 determinants
+</p>
+
+<p>
+The expression we used above is often remembered as follows, todo 3x3 matrix determinant
+
+EMPHASIZE HOW HARD SIGNS ARE!
+</p>
+
+<h2>Example problem</h2>
+
+<p>
+What is the shortest distance from the point \(R(2,3,4)\) to the line from \(P(1,1,1)\) to \(Q(3,3,0)\)? TODO picture
+</p>
+
+<p>
+You solved this in your lecture on Wednesday using dot products; today, we will solve it using cross products.
+</p>
+
+<p>
+TODO
+</p>
+
+</body>
+</html>
