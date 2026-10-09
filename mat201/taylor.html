@@ -179,7 +179,7 @@
         <p id="error-caption">Always go to the <em>next order</em> to calculate an error bound: for a first-order approximation, bound the <em>second</em> derivatives.</p>
       </div>
       <div class="error-equation tex" id="error-equation" data-display="true" data-tex="|f(x,y)-T_1(x,y)|\leq\frac{M_2}{2!}\bigl(|x-a|+|y-b|\bigr)^2">|f(x, y) − T₁(x, y)| ≤ M₂/2 (|x − a| + |y − b|)²</div>
-      <p class="error-definition" id="error-definition">Here <span class="tex" data-tex="M_2">M₂</span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="f_{xx},\,f_{xy},\,f_{yx},\,f_{yy}"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.</p>
+      <p class="error-definition" id="error-definition">Here <span class="tex" data-tex="M_2">M₂</span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="|f_{xx}|,\,|f_{xy}|,\,|f_{yx}|,\,|f_{yy}|"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.</p>
     </div>
     <noscript><p>For the quadratic approximation, the bound is M₃/6 (|x − a| + |y − b|)³, where M₃ bounds every third derivative throughout the rectangle.</p></noscript>
   </section>
@@ -247,13 +247,13 @@
       title:'Error in the linear approximation',
       caption:'Always go to the <em>next order</em> to calculate an error bound: for a first-order approximation, bound the <em>second</em> derivatives.',
       formula:tex`|f(x,y)-T_1(x,y)|\leq\frac{M_2}{2!}\bigl(|x-a|+|y-b|\bigr)^2`,
-      definition:'Here <span class="tex" data-tex="M_2"></span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="f_{xx},\\,f_{xy},\\,f_{yx},\\,f_{yy}"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
+      definition:'Here <span class="tex" data-tex="M_2"></span> is the maximum absolute value of <em>any</em> second derivative—<span class="tex" data-tex="|f_{xx}|,\\,|f_{xy}|,\\,|f_{yx}|,\\,|f_{yy}|"></span>—anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
     },
     2: {
       title:'Error in the quadratic approximation',
       caption:'Always go to the <em>next order</em> to calculate an error bound: for a second-order approximation, bound the <em>third</em> derivatives.',
       formula:tex`|f(x,y)-T_2(x,y)|\leq\frac{M_3}{3!}\bigl(|x-a|+|y-b|\bigr)^3`,
-            definition:'Here <span class="tex" data-tex="M_3"></span> is the maximum absolute value of <em>any</em> of the possible third derivatives: <span class="tex" data-tex="f_{xxx}, f_{xxy}, f_{xyy}, f_{yyy}"></span>, anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
+            definition:'Here <span class="tex" data-tex="M_3"></span> is the maximum absolute value of <em>any</em> of the possible third derivatives: <span class="tex" data-tex="|f_{xxx}|, |f_{xxy}|, |f_{xyy}|, |f_{yyy}|"></span>, anywhere in the rectangle. Bound the derivatives over the whole rectangle, not just at its center.'
     }
   };
 
