@@ -129,7 +129,6 @@
       <h2 id="widget-title">Build the Taylor polynomial</h2>
       <span class="stage-count" id="stage-count">Step 1 of 6</span>
     </div>
-    <p class="assumption">Assume <span class="tex" data-tex="f">f</span> is smooth near <span class="tex" data-tex="(a,b)">(a, b)</span>.</p>
     <div class="orders" role="tablist" aria-label="Taylor polynomial order">
       <button class="order-tab" id="order-0" type="button" role="tab" aria-selected="true" aria-controls="taylor-panel" tabindex="0" data-order="0">Zeroth order</button>
       <button class="order-tab" id="order-1" type="button" role="tab" aria-selected="false" aria-controls="taylor-panel" tabindex="-1" data-order="1">First order</button>
@@ -144,7 +143,7 @@
       <div id="formula-panel">
         <div class="caption" aria-live="polite" aria-atomic="true">
           <h3 id="step-title">Zeroth order</h3>
-          <p id="step-caption">Use the value of the function at our center.</p>
+          <p id="step-caption">If (x, y) is close to (a, b), then probably f(x, y) is close to f(a, b).</p>
         </div>
         <div class="equation" id="equation" role="group" aria-label="Zeroth-order Taylor approximation">
           <div class="degree current" data-order="0"><span class="term tex" data-tex="f(x,y)\approx f(a,b)">f(x, y) ≈ f(a, b)</span></div>
@@ -222,7 +221,7 @@
     },
     {
       order:1, mode:'raw', title:'First order',
-      caption:'Use <em>both</em> possible first derivatives.'
+      caption:'Remember: the first order approximation still uses the first derivative, but we need to make sure to use <em>both</em> possible first derivatives!'
     },
     {
       order:2, mode:'raw', title:'Second order',
@@ -230,7 +229,7 @@
     },
     {
       order:2, mode:'simplified', title:'Second order, collected',
-      caption:'Remember that <span class="tex" data-tex="f_{xy}=f_{yx}"></span>, so we can collect thme together to simplify the formula.'
+      caption:'Remember that <span class="tex" data-tex="f_{xy}=f_{yx}"></span>, so we can collect those terms together to simplify the formula.'
     },
     {
       order:3, mode:'raw', title:'Third order',
@@ -238,7 +237,7 @@
     },
     {
       order:3, mode:'simplified', title:'Third order, collected',
-      caption:'Now <span class="tex" data-tex="f_{xxy}=f_{xyx}=f_{yxx}"></span> and <span class="tex" data-tex="f_{xyy}=f_{yxy}=f_{yyx}"></span>. Each group of three equal mixed terms combines into one.'
+      caption:'Now <span class="tex" data-tex="f_{xxy}=f_{xyx}=f_{yxx}"></span> and <span class="tex" data-tex="f_{xyy}=f_{yxy}=f_{yyx}"></span>. We can collect equal terms together.'
     }
   ];
 
